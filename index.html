@@ -38,8 +38,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 # Topic Modeling
 <hr/>
 <br/>
-<br/>
-<p>Vorlesung</p>
+<p>Vorlesung im Rahmen der <em>Einführung in die <br/>Digital Humanities</em>, Universität Hamburg</p>
 <br/>
 <hr/>
 <p>Christof Schöch<br/>(CLiGS, Universität Würzburg)</p>
@@ -50,11 +49,11 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <section data-markdown>
 <script type="text/template">
 ## Überblick
-1. Theorie: Was ist Topic Modeling?
-2. Anwendung: Der Topic Modeling Workflow (tmw)
-3. Ergebnisse: Visualisierungen der Topics
-4. Ergebnisse: Visualisierungen der Verteilungen
-5. Weiterführendes
+1. Einstieg: Wozu Topic Modeling?
+2. Theorie: Was ist Topic Modeling?
+3. Anwendung: Der Topic Modeling Workflow (tmw)
+4. Ergebnisse: Eine Beispielanalyse
+5. Fazit
 </script>
 </section>
 
@@ -62,23 +61,75 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-# 1. Was ist Topic Modeling?
+# 1. Einstieg:<br/>Wozu Topic Modeling?
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## Topic Modeling
-Grundidee
-* Entdeckt Wörter, die immer wieder gemeinsam bzw. in ähnlichen Kontexten vorkommen (Topics)
-* Berechnet, wie wichtig jeder Topic in jedem Dokument ist
-* Wichtig: keinerlei explizites semantisches Wissen fließt ein
-Etwas technischer
-* Ein Topic ist eine Verteilung von Wahrscheinlichkeiten von Wörtern
-* Ein Dokument ist eine Verteilung von Wahrscheinlichkeiten von Topics
+## Erste Annäherung
+* Topic Modeling ist eine quantitative Methode der Textanalyse <!-- .element: class="fragment" data-fragment-index="1" -->
+* Topic Modeling eignet sich insbesondere für sehr große Textsammlungen <!-- .element: class="fragment" data-fragment-index="2" -->
+* Topic Modeling identifiziert automatisch wiederkehrende Themen, Motive, Diskurse <!-- .element: class="fragment" data-fragment-index="3" -->
 </script>
 </section>
 
+<section data-markdown>
+<script type="text/template">
+## Anwendungsszenarien
+* Information Retrieval: Suche nicht nach Einzelbegriffen, sondern nach Themen / Wortfeldern <!-- .element: class="fragment" data-fragment-index="1" -->
+* Recommender Systems: Vorschlag thematisch ähnlicher wissenschaftlicher Artikel <!-- .element: class="fragment" data-fragment-index="2" -->
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Explorative Visualisierung (1)
+<p><a href="http://signsat40.signsjournal.org/topic-model/#/model/grid"><img height="500" data-src="img/signs-at-forty.png"></img></a></p>
+<p>Signs at 40</p>
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Explorative Visualisierung (2)
+<p><a href="http://dh.library.yale.edu/projects/vogue/topics/50/"><img height="500" data-src="img/topic-model-of-vogue.png"></img></a></p>
+<p>Topic Modeling Vogue</p>
+</script>
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+## Forschungsbeiträge
+* Cameron Blevins: "Topic Modeling Martha Ballard's Diary" (2010): Tagebuch <!-- .element: class="fragment" data-fragment-index="1" -->
+* Ted Underwood und Andrew Goldstone (2012): "What can topic models of PMLA teach us...": Fachgeschichte <!-- .element: class="fragment" data-fragment-index="2" -->
+* Lisa Rhody, "Topic Modeling and Figurative Language" (2012): Poesie <!-- .element: class="fragment" data-fragment-index="3" -->
+* Matthew Jockers, Macroanalysis (2013): Roman, Nationalität und Gender <!-- .element: class="fragment" data-fragment-index="4" -->
+* Ben Schmidt: "Typical TV episodes" (2014): Fernseh-Serien, Zeitverlauf <!-- .element: class="fragment" data-fragment-index="5" -->
+* Christof Schöch, "Topic Modeling Genre" (2017): Drama, Untergattungen <!-- .element: class="fragment" data-fragment-index="6" -->
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Zwischenbilanz
+* Vielfältige Anwendungsgebiete
+* Aber: wie funktioniert es genau?
+</script>
+</section>
+
+
+</section>
+<section>
+
+
+
+<section data-markdown>
+<script type="text/template">
+# 2. Theorie:</br>Was ist Topic Modeling?
+</script>
+</section>
 
 <section data-markdown>
 <script type="text/template">
@@ -90,7 +141,59 @@ Etwas technischer
 
 <section data-markdown>
 <script type="text/template">
-## Generativ, Iterativ
+## Topic Modeling: Grundidee
+* Entdeckt Wörter, die immer wieder gemeinsam bzw. in ähnlichen Kontexten vorkommen (=Topics) <!-- .element: class="fragment" data-fragment-index="1" -->
+* Distributionelle Semantik: "a word is characterized by the company it keeps" (John Firth, 1957) <!-- .element: class="fragment" data-fragment-index="2" -->
+* Rein datenbasiert; keinerlei explizites semantisches Wissen fließt ein <!-- .element: class="fragment" data-fragment-index="3" -->
+* Berechnet, wie wichtig jedes Wort in jedem Topic ist <!-- .element: class="fragment" data-fragment-index="4" -->
+* Berechnet, wie wichtig jeder Topic in jedem Dokument ist <!-- .element: class="fragment" data-fragment-index="5" -->
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Topic Modeling: Transformation
+* Input: <!-- .element: class="fragment" data-fragment-index="1" -->
+    * Eine umfangreiche Textsammlung
+    * Form: jedes Dokument als geordnete Liste von Wörtern
+* Output: <!-- .element: class="fragment" data-fragment-index="2" -->
+    * Wahrscheinlichkeiten der Topics in den Texten (Dokumente x Topics)
+    * Wahrscheinlichkeit der Wörter in den Topics (Topics x Wörter)
+</script>
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+## Das Modell: Texte
+<p><img height="400" data-src="img/docs-and-topics-in-rank.png"></img></p>
+<p>(Jedes Dokument ist eine Wahrscheinlichkeitsverteilung von Topics)
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+## Das Modell: Topics
+<p><img height="400" data-src="img/word-scores-in-topics.png"></img></p>
+<p>(Jeder Topic ist eine Wahrscheinlichkeitsverteilung von Wörtern)
+</script>
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+## Topic Modeling und Bayes'sche Statistik
+>"The computational problem of inferring the hidden topic structure from the documents is the problem of computing the posterior distribution, the conditional distribution of the hidden variables given the documents."
+
+<br/>
+<p>(David Blei, "Probabilistic Topic Models", 2012)</p>
+</script>
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+## Generativ, Inferentiell
 <p><img height="500" data-src="img/tm_steyvers1.png"></img></p>
 <p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
 </script>
@@ -98,11 +201,30 @@ Etwas technischer
 
 <section data-markdown>
 <script type="text/template">
-## Generativ, Iterativ
+## Generativ, Inferentiell
 <p><img height="500" data-src="img/tm_steyvers2.png"></img></p>
 <p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
 </script>
 </section>
+
+<!---
+<section data-markdown>
+<script type="text/template">
+## Latent Dirichlet Allocation: plate notation
+<p><img height="500" data-src="img/wikipedia_topic-modeling-plate-notation.png"></img></p>
+<p>(<https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation>)</p>
+</script>
+</section>
+-->
+
+
+<section data-markdown>
+<script type="text/template">
+## How it works exactly, clearly explained
+<p><img height="600" data-src="img/sharris_more-explicit-in-step-two.jpg"></img></p>  <!-- .element: class="fragment" data-fragment-index="1" -->
+</script>
+</section>
+
 
 
 </section>
@@ -110,33 +232,44 @@ Etwas technischer
 
 <section data-markdown>
 <script type="text/template">
-# 2. Anwendung: Topic Modeling Workflow</h2>
+# 3. Anwendung:<br/>Topic Modeling Workflow</h2>
 </script>
 </section>
 
 <section data-markdown>
 <script type="text/template">
-## Preprocessing, Modeling, Postprocessing
-<img height="500" data-src="img/tm_tmw.png"></img>
+## (2) Topic Modeling Workflow
+<p><a href="img/2_topic-modeling-workflow.png"><img height="500" data-src="img/2_topic-modeling-workflow.png"></img></a></p>
+<p>(Mallet und Python; siehe <a href="http://github.com/cligs/tmw">github.com/cligs/tmw</a>.)</p>
 </script>
 </section>
+
 
 <section data-markdown>
 <script type="text/template">
 ## Umsetzung: Mallet und Python
-* MALLET = Machine Learning for Language Toolkit, https://github.com/mimno/Mallet
-* Python = Programmiersprache, https://www.python.org/
-* tmw = Topic Modeling Workflow, https://github.com/cligs/tmw
-* tmw = modulare Funktionen + Konfigurationsdatei
+* MALLET (Machine Learning for Language Toolkit, https://github.com/mimno/Mallet): das eigentliche Topic Modeling 
+* Python (Programmiersprache, https://www.python.org/): alles andere drumherum (tmw)
 </script>
 </section>
+
+<section data-markdown>
+<script type="text/template">
+## Parameter
+* Präprozessieren: Länge der Textsegmente, Lemmatisierung, Feature-Selektion  <!-- .element: class="fragment" data-fragment-index="1" -->
+* Modellieren: Anzahl der Topics, Anzahl der Iterationen, Optimierungsmodus  <!-- .element: class="fragment" data-fragment-index="2" -->
+* Visualisierung: Berechnung der Mittelwerte, Normalisierungen  <!-- .element: class="fragment" data-fragment-index="3" -->
+</script>
+</section>
+
+
 
 </section>
 <section>
     
 <section data-markdown>
 <script type="text/template">
-# 3. Ergebnisse: Visualisierung der Topics
+# 4. Ergebnisse:</br>Eine Beispielanalyse
 </script>
 </section>
 
@@ -150,132 +283,102 @@ Etwas technischer
 
 <section data-markdown>
 <script type="text/template">
-## Ein Topic als Wordcloud
-<img height="500" data-src="img/wordle_tp092x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Geld-Münze-Franc
-<img height="500" data-src="img/wordle_tp028x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Professor-Wissenschaft-Weiser
-<img height="500" data-src="img/wordle_tp011x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Verbrechen-Tod-Mord
-<img height="500" data-src="img/wordle_tp002x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Musik-Piano-Lied
-<img height="500" data-src="img/wordle_tp048x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Buch-Bibliothek-Seite
-<img height="500" data-src="img/wordle_tp041x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Auto-Straße-Fahrer
-<img height="500" data-src="img/wordle_tp061x.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Tier-Tier-Löwe
-<img height="500" data-src="img/wordle_tp075x.png"></img>
+## Das verwendete Modell
+* Parameter <!-- .element: class="fragment" data-fragment-index="1" -->
+    * Textsegmente von 1000 Wörtern
+    * Lemmatisierung und Auswahl von N,V,Adj,Adv
+    * 80 Topics (getestet: 60-280)
+    * keine regelmäßige Hyperparameter-Optimierung
+* Evaluation <!-- .element: class="fragment" data-fragment-index="2" -->
+    * relevanter Klassifikationstask (Krimi vs. Nicht-Krimi)
+    * beste Performance 0.79 mean accuracy
 </script>
 </section>
 
 
-</section>
-<section>
 
 <section data-markdown>
 <script type="text/template">
-# 4. Ergebnisse: Visualisierung der Verteilungen</h2>
+## Kriminalroman (prototypisch)
+* Längere, narrative, fiktionale Prosa <!-- .element: class="fragment" data-fragment-index="1" -->
+* Figureninventar: Ermittler, Verbrecher, Verdächtige, Opfer, Zeugen <!-- .element: class="fragment" data-fragment-index="2" -->
+* Handlung: gewalttätiges Verbrechen, rationale Aufklärung <!-- .element: class="fragment" data-fragment-index="3" -->
+* Schauplatz: urbaner Raum  <!-- .element: class="fragment" data-fragment-index="4" -->
+* => Hypothesen zu erwartbaren Themen <!-- .element: class="fragment" data-fragment-index="5" -->
+</script>
+</section>
+
+
+
+<section data-markdown>
+<script type="text/template">
+##Topic 10 
+<p><a href="img/2_topic10-wordle-comparison.png"><img height="400" data-src="img/2_topic10-wordle-comparison.png"></img></a></p>
+<p>Topic 10: Inspektor, Kommissar, Polizei</p>
+<p>inhaltlich und statistisch Krimi-spezifisch (p &lt; α=0.01)</p> <!-- .element: class="fragment" data-fragment-index="1" -->
 </script>
 </section>
 
 
 <section data-markdown>
 <script type="text/template">
-## Topics/Untergattung-Heatmap
-<img height="500" data-src="img/topic-doc-matrix.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Topics über die Jahrzehnte
-<img height="500" data-src="img/lineplot-3-227.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Topics und Autoren: Einzeltopic
-<img height="500" data-src="img/tI_by-author-name-003.png"></img>
-</script>
-</section>
-
-<section data-markdown>
-<script type="text/template">
-## Topics und Autoren: Clustering
-<img height="500" data-src="img/item-clustering_author-name_cosine-weighted-mean-50topics.jpg"></img>
+##Topic 49
+<p><a href="img/2_topic49-wordle-comparison.png"><img height="400" data-src="img/2_topic49-wordle-comparison.png"></img></a></p>
+<p>Topic 49: Tod, Verbrechen, töten</p>
+<p>inhaltlich und statistisch Krimi-spezifisch (p &lt; α=0.01)</p>
 </script>
 </section>
 
 
 <section data-markdown>
 <script type="text/template">
-## Textsammlung: 127 spanische Romane
-<img height="500" data-src="img/textsammlung_ES.png"></img>
+##Topic 47
+<p><a href="img/2_topic47-wordle-comparison.png"><img height="400" data-src="img/2_topic47-wordle-comparison.png"></img></a></p>
+<p>Topic 47: Tür, Zimmer, öffnen; inhaltlich Krimi-spezifisch?</p>
+<p>Statistisch Krimi-spezifisch (p &lt; α=0.01)</p> 
 </script>
 </section>
 
-<section data-markdown>
-<script type="text/template">
-## Topic/Dokument-Matrix
-<img height="500" data-src="img/topic-genre-heatmap.png"></img>
-</script>
-</section>
 
 <section data-markdown>
 <script type="text/template">
-## Topic/Dokument-Matrix
-<img height="500" data-src="img/topics_fallend.png"></img>
+##Topic 26 
+<p><a href="img/2_topic26-wordle-comparison.png"><img height="400" data-src="img/2_topic26-wordle-comparison.png"></img></a></p>
+<p>Topic 26: Strand, Sand, Sonne</p>
+<p>Statistisch Nicht-Krimi spezifisch (p &lt; α=0.001)</p>
 </script>
 </section>
 
-<section data-markdown>
-<script type="text/template">
-## Topic/Dokument-Matrix
-<img height="500" data-src="img/topics_ansteigend.png"></img>
-</script>
-</section>
 
 <section data-markdown>
 <script type="text/template">
-## Textverlauf und Untergattung
-<img height="500" data-src="img/textverlauf-untergattung.png"></img>
+## Topics im Textverlauf
+<p><a href="img/2_topic002_progression.png"><img height="400" data-src="img/2_topic002_progression.png"></img></a></p>
+<p>Topic 2: Richter, Gefängnis, Anwalt</p>
+<p>Signifikanz (Krimis): u.a. (1,4), (4,5) signifikant (p &lt; α=0.01)</p>
+</script>
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+## Topics im Textverlauf
+<p><a href="img/2_topic033_progression.png"><img height="400" data-src="img/2_topic033_progression.png"></img></a></p>
+<p>Topic 33: schwarz, Haare, tragen, weiß, Auge, Gesicht</p>
+<p>Signifikanz (Krimis): alle außer (2,3) signifikant (p &lt; α=0.01)
+<br/>(Nicht-Krimis): u.a. (1,3), (2,5),  signifikant (p &lt; α=0.01)</p>
+</script>
+</section>
+
+
+
+<section data-markdown>
+<script type="text/template">
+## Ergebnisse
+* Ein großer Teil der Topics ist distinktiv entweder für Krimis (31/80) oder Nicht-Krimis (21/80) <!-- .element: class="fragment" data-fragment-index="1" -->
+* Topics entsprechen nicht nur Themen, sondern auch Handlungsmotiven, Figurengruppen oder Setting <!-- .element: class="fragment" data-fragment-index="2" -->
+* Textverlauf: Nur in wenigen Fällen deutliche Trends sichtbar <!-- .element: class="fragment" data-fragment-index="3" -->
+* Insgesamt: Wir können Trends in 840 Romanen entdecken, ohne alle Romane zu lesen! <!-- .element: class="fragment" data-fragment-index="4" -->
 </script>
 </section>
 
@@ -284,9 +387,20 @@ Etwas technischer
 
 <section data-markdown>
 <script type="text/template">
-# 5. Weiterführendes</h2>
+# 5. Fazit
 </script>
 </section>
+
+<section data-markdown>
+<script type="text/template">
+## Bilanz
+* Topic Modeling ist ein sehr mächtiges, quantitatives, sprachunabhängiges Verfahren <!-- .element: class="fragment" data-fragment-index="1" -->
+* Topic Models skalieren nicht nur gut, sondern brauchen große Textmengen <!-- .element: class="fragment" data-fragment-index="2" -->
+* Topics sind nicht nur Themen, sondern beziehen sich auch auf Motive, Setting, Figuren, Register, Diskurse... <!-- .element: class="fragment" data-fragment-index="3" -->
+* Literarische Texte haben andere Topics als Sachtexte; haben Gattungen auch spezifische Topics? <!-- .element: class="fragment" data-fragment-index="4" -->
+</script>
+</section>
+
 
 <section data-markdown>
 <script type="text/template">
@@ -307,8 +421,9 @@ Etwas technischer
 * Blevins, C. (2010). "Topic Modeling Martha Ballard’s Diary". In: _Historying_. http://historying.org/2010/04/01/topic-modeling-martha-ballards-diary/
 * Jockers, M. L. (2013). _Macroanalysis - Digital Methods and Literary History_. Champaign, IL: University of Illinois Press.
 * Rhody, L. M. (2012). "Topic Modeling and Figurative Language". In: _Journal of Digital Humanities_, 2(1) http://journalofdigitalhumanities.org/2-1/topic-modeling-and-figurative-language-by-lisa-m-rhody/
-* Schöch, C. (2016). "Topic Modeling Genre: An Exploration of French Classical and Enlightenment Drama". In: _Digital Humanities Quarterly_. http://digitalhumanities.org/dhq/
+* Schöch, C. (2017). "Topic Modeling Genre: An Exploration of French Classical and Enlightenment Drama". In: _Digital Humanities Quarterly_.
 * Underwood, T. and Goldstone, A. (2012)." "What can topic models of PMLA teach us about the history of literary scholarship?" In: _The Stone and the Shell_. http://tedunderwood.com/2012/12/14/what-can-topic-models-of-pmla-teach-us-about-the-history-of-literary-scholarship/
+
 </small>
 </script>
 </section>
@@ -317,18 +432,16 @@ Etwas technischer
 
 </section>
 
-
 <section data-markdown>
 <script type="text/template">
+###Vielen Dank!
 <br/>
 <br/>
 <br/>
-<br/>
-<p>Autor: Christof Schöch, 2016</p>
-<p><a href="http://www.christof-schoech.de">christof-schoech.de</a>
 <hr/>
-<p>Lizenz: Creative Commons Attribution 4.0 International</p>
-<p><a href="https://creativecommons.org/licenses/by/4.0/">creativecommons.org/licenses/by/4.0/</a></p>
+<p>Folien: <a href="https://christofs.github.io/topic-modeling-vorlesung/#/">christofs.github.io</a>
+<br/>
+<p>Autor: <a href="http://www.christof-schoech.de">Christof Schöch</a>, Lizenz: <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>, 2016.</p>
 </script>
 </section>
 
