@@ -35,7 +35,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-# Topic Modeling: Theorie und Anwendung
+# Topic Modeling:<br/>Theorie und Anwendung
 <hr/>
 <br/>
 <p>Vorlesung im Rahmen der <em>Einführung in die <br/>Digital Humanities</em>, Universität Hamburg</p>
@@ -69,8 +69,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <script type="text/template">
 ## Erste Annäherung
 * Topic Modeling ist eine quantitative Methode der Textanalyse <!-- .element: class="fragment" data-fragment-index="1" -->
-* Topic Modeling eignet sich insbesondere für sehr große Textsammlungen <!-- .element: class="fragment" data-fragment-index="2" -->
-* Topic Modeling identifiziert automatisch wiederkehrende Themen, Motive, Diskurse <!-- .element: class="fragment" data-fragment-index="3" -->
+* Topic Modeling identifiziert automatisch wiederkehrende Themen, Motive, Diskurse <!-- .element: class="fragment" data-fragment-index="2" -->
+* Topic Modeling eignet sich insbesondere für sehr große Textsammlungen <!-- .element: class="fragment" data-fragment-index="3" -->
 </script>
 </section>
 
@@ -79,6 +79,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 ## Anwendungsszenarien
 * Information Retrieval: Suche nicht nach Einzelbegriffen, sondern nach Themen / Wortfeldern <!-- .element: class="fragment" data-fragment-index="1" -->
 * Recommender Systems: Vorschlag thematisch ähnlicher wissenschaftlicher Artikel <!-- .element: class="fragment" data-fragment-index="2" -->
+* Exploration von Textsammlungen <!-- .element: class="fragment" data-fragment-index="3" -->
+* Literatur- und kulturhistorische Fragestellungen <!-- .element: class="fragment" data-fragment-index="4" -->
 </script>
 </section>
 
@@ -136,8 +138,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 * Entdeckt Wörter, die immer wieder gemeinsam bzw. in ähnlichen Kontexten vorkommen (=Topics) <!-- .element: class="fragment" data-fragment-index="1" -->
 * Distributionelle Semantik: "a word is characterized by the company it keeps" (John Firth, 1957) <!-- .element: class="fragment" data-fragment-index="2" -->
 * Rein datenbasiert; keinerlei explizites semantisches Wissen fließt ein <!-- .element: class="fragment" data-fragment-index="3" -->
-* Berechnet, wie wichtig jedes Wort in jedem Topic ist <!-- .element: class="fragment" data-fragment-index="4" -->
-* Berechnet, wie wichtig jeder Topic in jedem Dokument ist <!-- .element: class="fragment" data-fragment-index="5" -->
+* Berechnet, wie wichtig jeder Topic in jedem Dokument ist <!-- .element: class="fragment" data-fragment-index="4" -->
+* Berechnet, wie wichtig jedes Wort in jedem Topic ist <!-- .element: class="fragment" data-fragment-index="5" -->
 </script>
 </section>
 
@@ -156,7 +158,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-## Das Modell: Dokumente
+## Dokumente x Topics
 <p><img height="400" data-src="img/docs-and-topics-in-rank.png"></img></p>
 <p>(Jedes Dokument ist eine Wahrscheinlichkeitsverteilung von Topics)
 </script>
@@ -164,7 +166,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-## Das Modell: Topics
+## Topics x Wörter
 <p><img height="400" data-src="img/word-scores-in-topics.png"></img></p>
 <p>(Jeder Topic ist eine Wahrscheinlichkeitsverteilung von Wörtern)
 </script>
@@ -178,13 +180,14 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <br/>
 <p>(David Blei, "Probabilistic Topic Models", 2012)</p>
+<p>LDA: Latent Dirichlet Allocation</p>
 </script>
 </section>
 
 
 <section data-markdown>
 <script type="text/template">
-## Generativ, Inferentiell
+## LDA: generativ, inferentiell
 <p><img height="500" data-src="img/tm_steyvers1.png"></img></p>
 <p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
 </script>
@@ -192,7 +195,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-markdown>
 <script type="text/template">
-## Generativ, Inferentiell
+## LDA: generativ, inferentiell
 <p><img height="500" data-src="img/tm_steyvers2.png"></img></p>
 <p>(Steyvers and Griffiths, "Probabilistic Topic Modeling", 2006)</p>
 </script>
